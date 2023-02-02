@@ -1,0 +1,1012 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "description": "Dashboard Builder APIs",
+        "title": "Dashboard Builder APIs"
+    },
+    "host": "127.0.0.1:8080",
+    "schemes": ["http", "https"],
+    "basePath": "/v1",
+    "paths": {
+        "/login": {
+            "post": {
+                "summary": "Gets Dashboard Profile for the User",
+                "description": "Gets Dashboard Profile for the user\n",
+                "operationId": "LoginUser",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Profile"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Gets Dashboard Profile for the current User",
+                "description": "Gets Dashboard Profile for the current user\n",
+                "operationId": "GetCurrentUser",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Profile"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Log out from current user",
+                "description": "Log out from current user\n",
+                "operationId": "LogOutUser",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboards": {
+            "get": {
+                "summary": "List all the dashboard",
+                "description": "Deletes Dashboard identified by the id,\nfor a given group\n",
+                "operationId": "ListDashboard",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Dashboard"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new dashboard",
+                "description": "Create Dashboard with a content\nspecified in schema\n",
+                "operationId": "CreateDashboard",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Dashboard"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Dashboard"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboards/{dashboardId}": {
+            "get": {
+                "summary": "Get a dashboard element by Id",
+                "description": "Get a dashboard identified by the id\n",
+                "operationId": "GetDashboard",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "dashboardId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "format": "uid"
+                    },
+                    {
+                        "name": "version",
+                        "in": "query",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Dashboard"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update a dashboard identified by the given id",
+                "description": "Update a dashboard identified by the id\n",
+                "operationId": "UpdateDashboard",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "dashboardId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "format": "uid"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Dashboard"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Dashboard"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletes Dashboard identified by the given id",
+                "description": "Deletes Dashboard identified by the id\n",
+                "operationId": "DeleteDashboard",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "dashboardId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "format": "uid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/datasources": {
+            "get": {
+                "summary": "Get list of DataSources",
+                "description": "Get List of DataSources\n",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Datasource"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Saves a dashboard",
+                "description": "Saves a Dashboard\n",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Dashboard"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "System Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "required": ["username", "key"],
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                }
+            }
+        },
+        "Profile": {
+            "type": "object",
+            "required": ["theme", "fullScreen", "menus"],
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string",
+                    "enum": ["user", "admin"]
+                },
+                "theme": {
+                    "type": "string"
+                },
+                "fullScreen": {
+                    "type": "boolean"
+                },
+                "menus": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Menu"
+                    }
+                }
+            }
+        },
+        "Menu": {
+            "type": "object",
+            "required": [
+                "name",
+                "icon",
+                "action",
+                "position",
+                "collapsed",
+                "ancestor"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uid",
+                    "description": "ID of menu item"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the Menu Item to be displayed"
+                },
+                "html": {
+                    "type": "string",
+                    "description": "If html is specified then it would be displayed instead of name"
+                },
+                "icon": {
+                    "type": "string",
+                    "description": "icon that will be associated with the MenuItem"
+                },
+                "action": {
+                    "$ref": "#/definitions/Action",
+                    "description": "What partial to load when menu is clicked"
+                },
+                "position": {
+                    "type": "string",
+                    "description": "specifies position of this menu",
+                    "enum": ["LEFT", "TOP"]
+                },
+                "collapsed": {
+                    "type": "boolean",
+                    "description": "if true the menu would be minmized"
+                },
+                "ancestor": {
+                    "$ref": "#/definitions/Menu"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "required": ["message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        },
+        "Datasource": {
+            "type": "object",
+            "required": [
+                "name",
+                "id",
+                "group",
+                "description",
+                "url",
+                "sourceType",
+                "supportsStreaming",
+                "fields"
+            ],
+            "properties": {
+                "name": {
+                    "description": "user friendly display name",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "system identifier for the source, this id should be passed while fetching data",
+                    "type": "string",
+                    "format": "uid"
+                },
+                "group": {
+                    "description": "Grouping of Datasource for ease of management",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "user friendly description of the datasource and its intent",
+                    "type": "string"
+                },
+                "config": {
+                    "description": "object of configs, headers, and different parts of the URL for an API call. Also has a flag to override or inherit the dashboard-level config object.",
+                    "type": "object"
+                },
+                "url": {
+                    "description": "url to access the datasource",
+                    "type": "string"
+                },
+                "extractData": {
+                    "type": "string",
+                    "description": "JSONata syntax for data extraction"
+                },
+                "sourceType": {
+                    "description": "Type of source, so that appropriate handlers can be associated",
+                    "type": "string"
+                },
+                "supportsStreaming": {
+                    "description": "if true this source supports streaming.",
+                    "type": "boolean"
+                },
+                "category": {
+                    "description": "Could provide an indication of any postprocessors that need to applied",
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataField"
+                    }
+                },
+                "collectionFrequencyType": {
+                    "type": "string",
+                    "enum": ["SECONDS", "MINUTES", "HOURS"]
+                },
+                "collectionFrequencyValue": {
+                    "type": "integer"
+                },
+                "rollupFrequency": {
+                    "type": "string",
+                    "enum": [
+                        "MINUTE",
+                        "HOURLY",
+                        "DAILY",
+                        "WEEKLY",
+                        "MONTHLY",
+                        "YEARLY"
+                    ]
+                }
+            }
+        },
+        "DataField": {
+            "type": "object",
+            "required": ["name", "description", "type"],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": ["string", "date", "time", "datetime", "number"],
+                    "default": "number"
+                },
+                "format": {
+                    "type": "string"
+                }
+            }
+        },
+        "Component": {
+            "description": "Generic Component definition that store all the instances of components avaialable in\nthe web application.\n",
+            "type": "object",
+            "required": ["version", "id", "name"],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uid",
+                    "readOnly": true,
+                    "description": "UID of an instance of a component generated client-side. Generated when component added to a board."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A React class name we are going to render. Should be a JSX Tag name"
+                },
+                "version": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "To have a backward compability with changed components and their definitions in time we\nshould have a version for each of them. This point will makes the application sure that the\ndata we use is still correct. *Default* version is the last version of a component added to a board.\n"
+                },
+                "ancestor": {
+                    "type": "string",
+                    "format": "uid",
+                    "description": "UID of a ancestor (parent) component. If set that means the component was added to a tab group.\nWe are able to maintain more than 2-level but in real world it's useless.\n"
+                },
+                "params": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": null,
+                    "description": "Static params to pass to the component. Params are a free object but keep in mind\nthat the defintion of these parameters is coming from a component as well as configuration.\n"
+                },
+                "filters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Component"
+                    },
+                    "description": "Array of components objects used as filter. Like a dropdown, multiple select box"
+                },
+                "datasources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Datasource"
+                    },
+                    "description": "Array of datasources binded to a particular component. If a component has filter type\nthan it can use child's component datasources in order to display available data.\n"
+                }
+            }
+        },
+        "Dashboard": {
+            "example": {
+                "application/json": {
+                    "verion": 1,
+                    "id": "d380b051-d036-4a48-bb3b-93dc4ff7bea8",
+                    "title": "Performance analyzis",
+                    "tags": [
+                        {
+                            "title": "Memory consumptions",
+                            "order": 0
+                        }
+                    ],
+                    "layouts": [
+                        {
+                            "id": "4d8a5300-864d-4b56-916f-79738d48d3f8",
+                            "title": "Mainframes",
+                            "structure": [
+                                {
+                                    "i": "ef007d10-3994-495f-9df3-434515afab68",
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 1,
+                                    "h": 2,
+                                    "static": true
+                                },
+                                {
+                                    "i": "a63187e4-719a-4a4c-9bb6-cb2e5765ebfe",
+                                    "x": 1,
+                                    "y": 0,
+                                    "w": 3,
+                                    "h": 2,
+                                    "minW": 2,
+                                    "maxW": 4
+                                }
+                            ]
+                        },
+                        {
+                            "id": "a44bfc3b-c472-4ae8-a103-0f4d9a7eaa25",
+                            "title": "Virtuals",
+                            "structure": [
+                                {
+                                    "i": "94408f9c-d937-42aa-be0f-677e018f4bbf",
+                                    "x": 4,
+                                    "y": 0,
+                                    "w": 1,
+                                    "h": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "components": [
+                        {
+                            "id": "ef007d10-3994-495f-9df3-434515afab68",
+                            "type": "Chart",
+                            "ancestor": "null,",
+                            "datasources": [
+                                "09c2457d-6a5f-4774-85f7-266a5e247ce6"
+                            ],
+                            "params": {
+                                "transform": [
+                                    "data.y",
+                                    "count(09c2457d-6a5f-4774-85f7-266a5e247ce6.id)"
+                                ],
+                                "showLegend": true
+                            }
+                        },
+                        {
+                            "id": "a63187e4-719a-4a4c-9bb6-cb2e5765ebfe",
+                            "type": "Chart",
+                            "ancestor": "null,",
+                            "datasources": [
+                                "e5a7c1a8-0168-48d4-a28e-21c1e8a3805e"
+                            ],
+                            "params": {
+                                "transform": [
+                                    "data.y",
+                                    "avg(e5a7c1a8-0168-48d4-a28e-21c1e8a3805e.arr.stuff)"
+                                ],
+                                "showLegend": true
+                            }
+                        },
+                        {
+                            "id": "94408f9c-d937-42aa-be0f-677e018f4bbf",
+                            "type": "Chart",
+                            "ancestor": "null,",
+                            "datasources": [
+                                "269af53f-39b5-48cc-8ab6-0acfa2c10a7a"
+                            ],
+                            "params": {
+                                "transform": [
+                                    "data.y",
+                                    "sum(269af53f-39b5-48cc-8ab6-0acfa2c10a7a.ram)"
+                                ],
+                                "showLegend": true
+                            }
+                        }
+                    ],
+                    "dashboardApiConfigs": {
+                        "overrideDashboardConfig\"": false,
+                        "protocol": "https://",
+                        "host": "ivoyant-ui-api.k8.localhost.city",
+                        "uri": "restservices/customer360/v2/service",
+                        "accountId": 80138513,
+                        "headers": {
+                            "Content-Type": "application/json,",
+                            "Authorization": "Basic bTE5NzI5QGN1c3RvbABCewLmN3LmF0dC5jb206RjByY2VCdyF0aFU="
+                        }
+                    },
+                    "defaultApiConfigs": {
+                        "local": {
+                            "overrideDashboardConfig": false,
+                            "protocol": "http://",
+                            "host": "localhost:5000",
+                            "uri": "restservices/customer360/v2/service",
+                            "accountId": 80138513,
+                            "headers": {
+                                "Content-Type": "application/json",
+                                "Authorization": "Basic bTE5NzI5QGN1c3RvbABCewLmN3LmF0dC5jb206RjByY2VCdyF0aFU="
+                            }
+                        },
+                        "ivoyant": {
+                            "overrideDashboardConfig": false,
+                            "protocol": "https://",
+                            "host": "ivoyant-ui-api.k8.localhost.city",
+                            "uri": "restservices/customer360/v2/service",
+                            "accountId": 80138513,
+                            "headers": {
+                                "Content-Type": "application/json",
+                                "Authorization": "Basic bTE5NzI5QGN1c3RvbABCewLmN3LmF0dC5jb206RjByY2VCdyF0aFU="
+                            }
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": ["id", "title"],
+            "properties": {
+                "version": {
+                    "description": "Identifies the version of dashboard. This may help to use the right libraries/code to render.",
+                    "type": "integer"
+                },
+                "avaialableVerions": {
+                    "description": "Available verions of of dashboard. Available to switch between multiple versions",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "id": {
+                    "description": "ID of dashboard. Generated on a client.",
+                    "type": "string",
+                    "format": "uid"
+                },
+                "title": {
+                    "description": "Name of the dashboard",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "Icon code",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "Tags enable to separate dashboards by groups",
+                    "type": "array",
+                    "format": "tags",
+                    "items": {
+                        "$ref": "#/definitions/Tag"
+                    }
+                },
+                "layouts": {
+                    "description": "A representation of a layout. Layout is tab itself.\nInside of a layout you can position binded components.\n",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Layout"
+                    }
+                },
+                "datasources": {
+                    "description": "Links to datasources which are avaialable to a dashboard.\nBy default, if empty all datasources all available for dashboard\n",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Datasource"
+                    }
+                },
+                "components": {
+                    "description": "Links to component linked to the dashboard.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Component"
+                    }
+                },
+                "dashboardApiConfigs": {
+                    "description": "object of configs, headers, and different parts of the URL for an API call.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "#/definitions/dashboardApiConfigs"
+                    }
+                },
+                "defaultApiConfigs": {
+                    "description": "object of default dashboardApiConfigs",
+                    "type": "object"
+                }
+            }
+        },
+        "dashboardApiConfigs": {
+            "example": {
+                "protocol": "https://",
+                "host": "ivoyant-ui-api.k8.localhost.city",
+                "uri": "restservices/customer360/v2/service",
+                "accountId": 80138513,
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Authorization": "Basic bTE5NzI5QGN1c3RvbABCewLmN3LmF0dC5jb206RjByY2VCdyF0aFU="
+                }
+            },
+            "type": "object",
+            "properties": {
+                "protocol": {
+                    "description": "protocol of the URL. http:// or https://",
+                    "type": "string"
+                },
+                "host": {
+                    "description": "hostname of the url",
+                    "type": "string"
+                },
+                "uri": {
+                    "description": "uniform resource identifier",
+                    "type": "string"
+                },
+                "accountId": {
+                    "description": "account ID for the URL param",
+                    "type": "string"
+                },
+                "headers": {
+                    "description": "http headers for api request",
+                    "type": "object"
+                }
+            }
+        },
+        "Tag": {
+            "example": {
+                "application/json": {
+                    "title": "Memory consumptions",
+                    "order": 0
+                }
+            },
+            "type": "object",
+            "properties": {
+                "title": {
+                    "description": "Tag name. Must be unique.",
+                    "type": "string"
+                },
+                "order": {
+                    "description": "A prioirty of a tag",
+                    "type": "number",
+                    "default": 0
+                }
+            }
+        },
+        "Layout": {
+            "description": "Defenition of an object comes from react-grid-layout\nlibrary\n",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uid"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "structure": {
+                    "type": "object",
+                    "properties": null,
+                    "additionalProperties": true
+                }
+            }
+        },
+        "Action": {
+            "description": "A link action which should be\nexecuted on click\n",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

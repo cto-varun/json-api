@@ -1,0 +1,207 @@
+swagger: '2.0'
+info:
+    description: Alert API's description
+    version: '1.0.0'
+    title: Alert API
+host: 127.0.0.1:8080
+schemes:
+    - http
+    - https
+paths:
+    /alerts:
+        get:
+            summary: Returns a list of array
+            description: Returns a list of array
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: OK. Returned all alerts
+        post:
+            summary: Post a new alert
+            consumes:
+                - application/json
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: alert
+                  schema:
+                      $ref: '#/definitions/Alert'
+            responses:
+                201:
+                    description: Alert added
+    /alert/{alertId}:
+        get:
+            summary: Returns an alert.
+            description: Returns an alert
+            parameters:
+                - in: path
+                  name: alertId
+                  type: string
+                  required: true
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Alert'
+        put:
+            summary: Update an allert
+            description: Update an allert
+            parameters:
+                - name: alertId
+                  in: path
+                  type: string
+                  required: true
+                - name: update_alert
+                  in: body
+                  required: true
+                  schema:
+                      $ref: '#/definitions/Alert'
+            responses:
+                200:
+                    description: OK
+        delete:
+            summary: Delete an alert
+            description: Delete an allert
+            parameters:
+                - in: path
+                  name: alertId
+                  type: string
+                  required: true
+            responses:
+                204:
+                    description: Deleted.
+
+definitions:
+    NoDataStates:
+        type: string
+        enum: &NODATASTATES
+            - advertise
+            - noData
+            - saveLastState
+            - OK
+    Sizes:
+        type: string
+        enum: &SIZES
+            - s
+            - m
+            - h
+    Alert:
+        type: object
+        properties:
+            id:
+                description: Alert id generated on the client
+                type: string
+                format: uid
+            title:
+                type: string
+                description: The alert object
+            request:
+                type: array
+                description: The request to fetch specific alert
+                items:
+                    $ref: '#/definitions/AlertRequest'
+            tags:
+                type: array
+                items:
+                    $ref: '#/definitions/Tag'
+            createdAt:
+                type: string
+                format: date-time
+            modifiedAt:
+                type: string
+                format: date-time
+            noDataState:
+                type: string
+                enum: *NODATASTATES
+            timeOverState:
+                type: string
+                enum: *NODATASTATES
+    Tag:
+        type: object
+        properties:
+            title:
+                description: Tag name. Must be unique.
+                type: string
+            order:
+                description: A prioirty of a tag
+                type: number
+                default: 0
+    Notification:
+        type: object
+        properties:
+            provider:
+                type: array
+            addressee:
+                type: string
+            message:
+                type: string
+    AlertStateHistory:
+        type: object
+        properties:
+            status:
+                type: string
+                enum:
+                    - alerted
+                    - no data
+                    - ok
+            execDate:
+                type: string
+                format: date-time
+            title:
+                type: string
+    AlertRequest:
+        type: object
+        properties:
+            reducer:
+                type: string
+                enum:
+                    - avg
+                    - min
+                    - max
+                    - sum
+                    - count
+                    - median
+            query:
+                type: object
+                properties:
+                    id:
+                        type: string
+                        format: uid
+                    field:
+                        type: string
+                    startInt:
+                        type: object
+                        properties:
+                            value:
+                                type: integer
+                            size:
+                                type: string
+                                enum: *SIZES
+                    endInt:
+                        type: object
+                        properties:
+                            value:
+                                type: integer
+                            size:
+                                type: string
+                                enum: *SIZES
+                    condition:
+                        type: string
+                        enum:
+                            - lt
+                            - gte
+                            - lte
+                            - gt
+                            - eq
+                            - NULL
+                            - BETWEEN
+                            - OUTSIDE
+                    conditionValues:
+                        type: array
+                        description: if 0 -> NOW()

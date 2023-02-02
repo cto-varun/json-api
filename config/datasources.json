@@ -1,0 +1,2380 @@
+{
+    "envVars": {
+        "host": "localhost",
+        "port": 5001,
+        "config": {
+            "accountId": 22222,
+            "headers": {
+                "Authorization": "Basic bTE5NzI5QGN1c3RvbWVyMzYwLmN3LmF0dC5jb206Q3IhY2tldDMyNDIw",
+                "x-att-id": "attId",
+                "x-user-profile": "profile"
+            }
+        }
+    },
+    "defaults": {
+        "scheme": "http",
+        "baseUri": "/restservices/customer360/v2/service",
+        "config": {
+            "overrideDashboardConfig": false,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "windowVariables": {
+                "x-user-id": "COM_IVOYANT_VARS.asapId",
+                "x-att-id": "COM_IVOYANT_VARS.attId",
+                "x-user-profile": "COM_IVOYANT_VARS.profile"
+            },
+            "timeout": 60000
+        },
+        "method": "get",
+        "loadStrategy": "eager",
+        "essential": false,
+        "supportStreaming": false,
+        "sourceType": "REST",
+        "extractData": null,
+        "rollupFrequency": "HOURLY",
+        "group": "customer360",
+        "category": "DataApis",
+        "collectionFrequencyValue": 11726915
+    },
+    "datasources": [
+        {
+            "name": "360-get-mapped-tablet-plan",
+            "id": "360-get-mapped-tablet-plan",
+            "baseUri": "/restservices/customer360/v2/service/changeplan/getmappedtabletplan/{ban}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-reset-pin-and-sqa-override",
+            "id": "360-reset-pin-and-sqa-override",
+            "baseUri": "/restservices/customer360/v2/service/security/overrideresetpinsqa/{ctn}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                },
+                "encryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                }
+            }
+        },
+        {
+            "name": "360-get-search-list-balance",
+            "id": "360-get-search-list-balance",
+            "baseUri": "/restservices/customer360/v2/service/account/info/{accountId}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-get-auth-token",
+            "id": "360-get-auth-token",
+            "baseUri": "/restservices/customer360/v2/service/security/token/{ban}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            }
+        },
+        {
+            "name": "360-bulk-resume",
+            "id": "360-bulk-resume",
+            "description": "Bulk One Step Restore/Resume",
+            "baseUri": "/restservices/customer360/v2/service/bulkresume/{accountId}",
+            "method": "post",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-feature-flagging",
+            "id": "360-feature-flagging",
+            "description": "Feature flagging",
+            "uri": "/feature/{accountId}",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            },
+            "fields": [
+                {
+                    "name": "accountFeatures",
+                    "type": "object"
+                },
+                {
+                    "name": "lineLevelFeatures",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-network-status-bulk",
+            "id": "360-network-refresh",
+            "baseUri": "/restservices/customer360/v2/service/network/status",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-generate-ntp",
+            "id": "360-generate-ntp",
+            "baseUri": "/restservices/customer360/v2/service/security/ntp/{ctn}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-network-status",
+            "id": "360-network-status",
+            "description": "Get network status for a phone number",
+            "baseUri": "/restservices/customer360/v2/service/network/status/{phoneNumber}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            },
+            "fields": [
+                {
+                    "name": "provisioningStatus",
+                    "type": "string"
+                },
+                {
+                    "name": "provisioningStatusDescription",
+                    "type": "string"
+                },
+                {
+                    "name": "provisioningErrorInfo",
+                    "type": "object"
+                },
+                {
+                    "name": "realTimeProvisioningStatusInfo",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-network-refresh",
+            "id": "360-network-refresh",
+            "baseUri": "/restservices/customer360/v2/service/network/status/{phoneNumber}/notification",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-view-statements",
+            "id": "360-view-statements",
+            "baseUri": "/restservices/customer360/v2/service/statements/",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-metadata",
+            "id": "360-metadata",
+            "description": "Metadata",
+            "uri": "/metadata",
+            "essential": true,
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            },
+            "loadOnInitialLoad": true,
+            "fields": [
+                {
+                    "name": "domain",
+                    "type": "string"
+                },
+                {
+                    "name": "metadata",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-billcycle-getaccountinfo",
+            "id": "360-billcycle-getaccountinfo",
+            "description": "Get billcycle account info",
+            "uri": "/account/info/{accountId}",
+            "essential": true,
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            },
+            "fields": [
+                {
+                    "name": "accountDetails",
+                    "label": "accountDetails",
+                    "description": "",
+                    "type": "object"
+                },
+                {
+                    "name": "communicationPreferences",
+                    "label": "communicationPreferences",
+                    "description": "",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-unl-downgrade-tablet-lines",
+            "id": "360-update-tablet-lines",
+            "description": "Downgrading UNL account without tablet option",
+            "uri": "/updateTabletMapping",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-update-billcycle",
+            "id": "360-update-billcycle",
+            "description": "Change bill cycle date",
+            "uri": "/billcycle/update",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId"
+                }
+            }
+        },
+        {
+            "name": "360-confirm-billcycle",
+            "id": "360-confirm-billcycle",
+            "description": "Change bill cycle date",
+            "uri": "/billcycle/update",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-cancel-billcycle",
+            "id": "360-cancel-billcycle",
+            "description": "Delete Bill Cycle",
+            "uri": "/billcycle/cancel/{billingAccountNumber}",
+            "loadStrategy": "onDemand",
+            "method": "delete",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId",
+                    "Content-Type": "*/*"
+                }
+            }
+        },
+        {
+            "name": "360-bridgepay-info",
+            "id": "360-bridgepay-info",
+            "description": "Get bridgepay for making payment",
+            "uri": "/bridgePay/info/{accountId}",
+            "userGroup": "B",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            },
+            "fields": [
+                {
+                    "name": "eligibleFor",
+                    "type": "string"
+                },
+                {
+                    "name": "status",
+                    "type": "string"
+                },
+                {
+                    "name": "amountToEnroll",
+                    "type": "string"
+                },
+                {
+                    "name": "startDate",
+                    "type": "integer"
+                },
+                {
+                    "name": "endDate",
+                    "type": "integer"
+                }
+            ]
+        },
+        {
+            "name": "360-payment-info",
+            "id": "360-payment-info",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/payment/info/{accountId}",
+            "userGroup": "A",
+            "essential": true,
+            "fields": [
+                {
+                    "name": "paymentProfile",
+                    "type": "object"
+                }
+            ],
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-autopay-info",
+            "id": "360-autopay-info",
+            "description": "Get autopay card details",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/autopay/{accountId}",
+            "userGroup": "A",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            },
+            "fields": [
+                {
+                    "name": "billingAccountNumber",
+                    "type": "string"
+                },
+                {
+                    "name": "isAutopayEnabled",
+                    "type": "boolean"
+                },
+                {
+                    "name": "paymentCard",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-line-details",
+            "id": "360-line-details",
+            "description": "Line details",
+            "uri": "/lineDetails/{accountId}",
+            "sourceType": "be",
+            "supportsStreaming": true,
+            "userGroup": "B",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            },
+            "fields": [
+                {
+                    "name": "subscriberNumber",
+                    "type": "string"
+                },
+                {
+                    "name": "ptnStatus",
+                    "type": "string"
+                },
+                {
+                    "name": "ptnStatusLong",
+                    "type": "string"
+                },
+                {
+                    "name": "totalRate",
+                    "type": "string"
+                },
+                {
+                    "name": "subStatusLastAct",
+                    "type": "string"
+                },
+                {
+                    "name": "subStatusLastActLong",
+                    "type": "string"
+                },
+                {
+                    "name": "telephoneNumber",
+                    "type": "integer"
+                },
+                {
+                    "name": "throttlingStatus",
+                    "type": "string"
+                },
+                {
+                    "name": "currentDevice",
+                    "type": "object"
+                },
+                {
+                    "name": "previousDevice",
+                    "type": "object"
+                },
+                {
+                    "name": "currentRatePlan",
+                    "type": "object"
+                },
+                {
+                    "name": "dataBuckets",
+                    "type": "object"
+                },
+                {
+                    "name": "previousRatePlans",
+                    "type": "object"
+                },
+                {
+                    "name": "currentFeatures",
+                    "type": "object"
+                },
+                {
+                    "name": "previousFeatures",
+                    "type": "object"
+                },
+                {
+                    "name": "serviceRestrictionInfo",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-device-info",
+            "id": "360-device-info",
+            "description": "Device info",
+            "baseUri": "/restservices/cricket/v3/device?identifier={accountId}",
+            "sourceType": "be",
+            "supportsStreaming": true,
+            "userGroup": "B",
+            "config": {
+                "headers": {
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId"
+                }
+            },
+            "fields": [
+                {
+                    "name": "ban",
+                    "type": "string"
+                },
+                {
+                    "name": "ctn",
+                    "type": "string"
+                },
+                {
+                    "name": "device",
+                    "type": "object"
+                },
+                {
+                    "name": "imei",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "360-notification-info",
+            "id": "360-notification-info",
+            "description": "Notification info",
+            "baseUri": "/restservices/customer360/v2/service/releasenotes?attId={agentId}",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-customer-information",
+            "id": "360-customer-information",
+            "description": "",
+            "uri": "/customerInfo/{accountId}",
+            "userGroup": "B",
+            "fields": [
+                {
+                    "name": "firstName",
+                    "type": "string"
+                },
+                {
+                    "name": "lastName",
+                    "type": "string"
+                },
+                {
+                    "name": "emailAddress",
+                    "type": "string"
+                },
+                {
+                    "name": "adrCountry",
+                    "type": "string"
+                },
+                {
+                    "name": "streetAddress",
+                    "type": "string"
+                },
+                {
+                    "name": "accountType",
+                    "type": "string"
+                },
+                {
+                    "name": "accountSubType",
+                    "type": "string"
+                },
+                {
+                    "name": "adrPrimaryLn",
+                    "type": "string"
+                },
+                {
+                    "name": "adrCity",
+                    "type": "string"
+                },
+                {
+                    "name": "adrZip",
+                    "type": "string"
+                },
+                {
+                    "name": "adrStateCode",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "360-customer-view",
+            "id": "360-customer-view",
+            "description": "customer 360 view data",
+            "uri": "/customer360view/{accountId}",
+            "fields": [
+                {
+                    "name": "account",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-customer-additional-info",
+            "id": "360-customer-additional-info",
+            "description": "Customer additional info",
+            "uri": "/customeradditionalinfo/{accountId}",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            },
+            "fields": [
+                {
+                    "name": "billingAccountNumber",
+                    "type": "string"
+                },
+                {
+                    "name": "subscribers",
+                    "type": "object"
+                },
+                {
+                    "name": "recommendations",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-imei-history",
+            "id": "360-imei-history",
+            "description": "irure velit id exercitation consequat",
+            "uri": "/imeiHistory/{accountId}",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            },
+            "fields": [
+                {
+                    "name": "imei",
+                    "type": "integer"
+                },
+                {
+                    "name": "sim",
+                    "type": "string"
+                },
+                {
+                    "name": "phoneModel",
+                    "type": "string"
+                },
+                {
+                    "name": "activityDateStr",
+                    "type": "string"
+                },
+                {
+                    "name": "networkType",
+                    "type": "string"
+                },
+                {
+                    "name": "channel",
+                    "type": "string"
+                },
+                {
+                    "name": "source",
+                    "type": "string"
+                },
+                {
+                    "name": "ctn",
+                    "type": "string"
+                },
+                {
+                    "name": "activity",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "360-account-balances",
+            "id": "360-account-balances",
+            "description": "irure velit id exercitation consequat",
+            "essential": true,
+            "uri": "/accountBalances/{accountId}",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            },
+            "fields": [
+                {
+                    "name": "accountBalance",
+                    "type": "double"
+                },
+                {
+                    "name": "dueAmount",
+                    "type": "double"
+                },
+                {
+                    "name": "lastPaymentDate",
+                    "type": "date"
+                },
+                {
+                    "name": "lastPaymentAmount",
+                    "type": "double"
+                },
+                {
+                    "name": "dueImmediately",
+                    "type": "double"
+                },
+                {
+                    "name": "includedFees",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-search-orders",
+            "id": "360-search-orders",
+            "description": "Activity Management Search Orders",
+            "baseUri": "/restservices/customer360/v2/service/searchorders",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-search-customer",
+            "id": "360-search-customer",
+            "description": "Search Customer",
+            "baseUri": "/restservices/customer360/v2/service/searchcustomer",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-unlockimei-search",
+            "id": "360-unlockimei-search",
+            "description": "Search Customer",
+            "baseUri": "/restservices/customer360/v2/service/device/unlock/search/{imei}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId"
+                }
+            }
+        },
+        {
+            "name": "360-search-contact",
+            "id": "360-search-contact",
+            "description": "Search Contact",
+            "baseUri": "/restservices/customer360/v2/service/searchcontact",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-create-contact",
+            "id": "360-create-contact",
+            "description": "Create Contact",
+            "baseUri": "/restservices/customer360/v2/service/createcontact",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-validate-address",
+            "id": "360-validate-address",
+            "description": "Create Contact",
+            "baseUri": "/restservices/customer360/v2/service/validateAddress",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-search-cases",
+            "id": "360-search-cases",
+            "description": "Search Customer",
+            "baseUri": "/restservices/customer360/v2/service/cases/search",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-cancel-order",
+            "id": "360-cancel-order",
+            "description": "Activity Management Cancel Order",
+            "baseUri": "/restservices/customer360/v2/service/cancelorder/{uuid}",
+            "loadStrategy": "onDemand",
+            "method": "delete",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-update-order",
+            "id": "360-update-order",
+            "description": "Activity Management Update Order",
+            "baseUri": "/restservices/customer360/v2/service/updateorder/{uuid}",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                },
+                "maxRetries": 5,
+                "timeout": 10000,
+                "data": {}
+            }
+        },
+        {
+            "name": "360-update-portindetails",
+            "id": "360-update-portindetails",
+            "description": "Updating port Details",
+            "baseUri": "/restservices/customer360/v2/service/portindetails/{ctn}",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                },
+                "maxRetries": 5,
+                "timeout": 10000,
+                "data": {}
+            }
+        },
+        {
+            "name": "360-device-unlock",
+            "id": "360-device-unlock",
+            "description": "Device Unlock",
+            "baseUri": "/restservices/customer360/v2/service/device/unlock",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId"
+                }
+            }
+        },
+        {
+            "name": "360-sim-unlock",
+            "id": "360-sim-unlock",
+            "description": "Sim Unlock",
+            "baseUri": "/restservices/customer360/v2/service/device/puk/{sim}",
+            "loadStrategy": "onDemand",
+            "userGroup": "B",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-reset-voicemail-pass",
+            "id": "360-reset-voicemail-pass",
+            "description": "Reset voicemail password by calling SubscriberServices.",
+            "baseUri": "/restservices/customer360/v2/service/security/resetvoicemailpassword",
+            "method": "post",
+            "loadStrategy": "onDemand",
+            "essential": false,
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-customer-preferences",
+            "id": "360-customer-preferences",
+            "description": "Update Customer Preferences settings on Account and Subscriber level",
+            "baseUri": "/restservices/customer360/v2/service/customerpreferences",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            }
+        },
+        {
+            "name": "360-usage-history",
+            "id": "360-usage-history",
+            "description": "Usage History",
+            "baseUri": "/restservices/customer360/v2/service/usagesummary/{accountId}",
+            "userGroup": "B",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            },
+            "fields": [
+                {
+                    "name": "phoneNumber",
+                    "type": "integer"
+                },
+                {
+                    "name": "usageSummary",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-usagedetails",
+            "id": "360-usagedetails",
+            "description": "Usage Details",
+            "baseUri": "/restservices/customer360/v2/service/usagedetails/{phoneNumber}",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            },
+            "fields": []
+        },
+        {
+            "name": "360-ban-history",
+            "id": "360-ban-history",
+            "description": "Ban History",
+            "baseUri": "/restservices/customer360/v2/service/device/history/{imei}",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            },
+            "fields": []
+        },
+        {
+            "name": "360-pendingactivity",
+            "id": "360-pendingactivity",
+            "description": "Pending Activities",
+            "baseUri": "/restservices/customer360/v2/service/pendingactivity/{ban}",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "content-type": "*/*",
+                    "x-att-id": "attId"
+                }
+            },
+            "fields": []
+        },
+        {
+            "name": "360-reward-center",
+            "id": "360-reward-center",
+            "description": "Get Referral",
+            "baseUri": "/restservices/cricket/v2/rewardcenter/{accountId}",
+            "userGroup": "B",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            },
+            "fields": [
+                {
+                    "name": "activeReferralCount",
+                    "type": "integer"
+                },
+                {
+                    "name": "advocate",
+                    "type": "object"
+                },
+                {
+                    "name": "earnedCredits",
+                    "type": "object"
+                },
+                {
+                    "name": "pendingCredits",
+                    "type": "object"
+                },
+                {
+                    "name": "forfeitedCredits",
+                    "type": "object"
+                },
+                {
+                    "name": "potentialMaximumCredits",
+                    "type": "object"
+                },
+                {
+                    "name": "rewardDetails",
+                    "type": "object"
+                },
+                {
+                    "name": "referee",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-sms-history",
+            "id": "360-sms-history",
+            "description": "Get SMS History",
+            "baseUri": "/restservices/customer360/v2/service/smshistory",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-enrollment-autopay",
+            "id": "360-enrollment-autopay",
+            "description": "Get Enrollment Autopay",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/autopayhistory",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-enrollment-ebb",
+            "id": "360-enrollment-ebb",
+            "description": "Get Enrollment EBB Data",
+            "baseUri": "/restservices/cricket/bis/v1",
+            "uri": "/promise?billingAccountNumber={billingAccountNumber}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR"
+                }
+            }
+        },
+        {
+            "name": "360-bis-search",
+            "id": "360-bis-search",
+            "description": "Get Enrollment EBB Data",
+            "baseUri": "/restservices/cricket/bis/v1",
+            "uri": "/identity/search",
+            "loadStrategy": "onDemand",
+            "params": ["firstname", "lastname", "state"],
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR"
+                }
+            }
+        },
+        {
+            "name": "360-ebb-invite",
+            "id": "360-ebb-invite",
+            "description": "Invite for EBB enrollment",
+            "baseUri": "/restservices/cricket/bis/v1",
+            "uri": "/identity/acp/invite",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR"
+                }
+            }
+        },
+        {
+            "name": "360-ebb-register-v1",
+            "id": "360-ebb-register",
+            "description": "Register for EBB",
+            "baseUri": "/restservices/cricket/bis/v1",
+            "uri": "/identity/acp/register/secure",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR",
+                    "x-att-id": "attId"
+                },
+                "encryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                },
+                "decryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                }
+            }
+        },
+        {
+            "name": "360-ebb-de-enroll",
+            "id": "360-ebb-de-enroll",
+            "description": "Register for EBB",
+            "baseUri": "/restservices/cricket/bis/v1",
+            "uri": "/identity/acp/register",
+            "loadStrategy": "onDemand",
+            "method": "delete",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR"
+                }
+            }
+        },
+        {
+            "name": "360-ebb-register-v2",
+            "id": "360-ebb-register",
+            "description": "Register for EBB",
+            "baseUri": "/restservices/cricket/bis/v2",
+            "uri": "/identity/acp/register/secure",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR",
+                    "x-att-id": "attId"
+                },
+                "encryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                },
+                "decryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                }
+            }
+        },
+        {
+            "name": "360-ebb-credit-adjustment",
+            "id": "360-ebb-credit-adjustment",
+            "description": "Credit adjustment for EBB",
+            "baseUri": "/restservices/cricket/bis/v1",
+            "uri": "/promise/triggerpayout?billingAccountNumber={billingAccountNumber}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR"
+                }
+            }
+        },
+        {
+            "name": "360-bis-identity",
+            "id": "360-bis-identity",
+            "description": "Get BIS Identity",
+            "baseUri": "/restservices/cricket/bis/v1/identity/search/secure?idName={identityId2}&idValue={identityId1}",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR"
+                },
+                "decryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                }
+            },
+            "fields": [
+                {
+                    "name": "identifier",
+                    "type": "string"
+                },
+                {
+                    "name": "firstName",
+                    "type": "string"
+                },
+                {
+                    "name": "middleName",
+                    "type": "string"
+                },
+                {
+                    "name": "lastName",
+                    "type": "string"
+                },
+                {
+                    "name": "last4ssn",
+                    "type": "string"
+                },
+                {
+                    "name": "dateOfBirth",
+                    "type": "string"
+                },
+                {
+                    "name": "addresses",
+                    "type": "object"
+                },
+                {
+                    "name": "associations",
+                    "type": "object"
+                },
+                {
+                    "name": "cohorts",
+                    "type": "object"
+                },
+                {
+                    "name": "state",
+                    "type": "string"
+                },
+                {
+                    "name": "status",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "360-acp-status",
+            "id": "360-acp-status",
+            "description": "Check for ACP application status",
+            "baseUri": "/restservices/cricket/bis/v1",
+            "uri": "/qualify/search?appId={acpAppId}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR"
+                }
+            }
+        },
+        {
+            "name": "360-enrollment-bridgepay",
+            "id": "360-enrollment-bridgepay",
+            "description": "Get Enrollment BridgePay",
+            "uri": "/bridgepayhistory",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-billing-history",
+            "id": "360-billing-history",
+            "description": "Get Billing History",
+            "baseUri": "/restservices/customer360/v2/service/billingHistory/{accountId}",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            },
+            "fields": [
+                {
+                    "name": "monthName",
+                    "type": "string"
+                },
+                {
+                    "name": "startDate",
+                    "type": "string"
+                },
+                {
+                    "name": "billSeqNo",
+                    "type": "string"
+                },
+                {
+                    "name": "ban",
+                    "type": "string"
+                },
+                {
+                    "name": "suspended",
+                    "type": "boolean"
+                },
+                {
+                    "name": "bridgePay",
+                    "type": "boolean"
+                },
+                {
+                    "name": "dateTimeBuckets",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-take-payment",
+            "id": "360-take-payment",
+            "description": "",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/payment",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId"
+                },
+                "encryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                }
+            }
+        },
+        {
+            "name": "360-validate-payment",
+            "id": "360-validate-payment",
+            "description": "",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/payment/validate",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId"
+                },
+                "encryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                }
+            }
+        },
+        {
+            "name": "360-update-autopay",
+            "id": "360-update-autopay",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/autopay/{accountId}",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId"
+                },
+                "encryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                }
+            }
+        },
+        {
+            "name": "360-delete-autopay",
+            "id": "360-delete-autopay",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/autopay/{billingAccountNumber}",
+            "loadStrategy": "onDemand",
+            "method": "delete",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-reset-counter",
+            "id": "360-reset-counter",
+            "baseUri": "/restservices/cricket/bis/v1/identity/reset/{token}",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR"
+                }
+            }
+        },
+        {
+            "name": "360-enroll-autopay",
+            "id": "360-enroll-autopay",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/autopay/{accountId}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId"
+                },
+                "encryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                }
+            }
+        },
+        {
+            "name": "360-send-sms",
+            "id": "360-send-sms",
+            "description": "Endpoint for SMS communications, used for touchless payments",
+            "baseUri": "/restservices/cricket/v1/communication/sms",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "userGroup": "B"
+        },
+        {
+            "name": "360-accept-adjustment",
+            "id": "360-accept-adjustment",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/adjustment/create",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-reverse-adjustment",
+            "id": "360-reverse-adjustment",
+            "baseUri": "/restservices/voyagepaymentservices/v1/service/adjustment/reverse",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-interaction-history",
+            "id": "360-interaction-history",
+            "baseUri": "/restservices/customer360/v2/service/interactions/{accountId}",
+            "reloadOnRouteChange": true,
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            },
+            "fields": [
+                {
+                    "name": "ctn",
+                    "type": "string"
+                },
+                {
+                    "name": "billingAccountNumber",
+                    "type": "string"
+                },
+                {
+                    "name": "interactions",
+                    "type": "object"
+                }
+            ]
+        },
+        {
+            "name": "360-device-history",
+            "id": "360-device-history",
+            "baseUri": "/restservices/customer360/v2/service/imeiHistory/{accountId}",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            },
+            "fields": [
+                {
+                    "name": "totalPages",
+                    "type": "integer"
+                },
+                {
+                    "name": "history",
+                    "type": "object"
+                }
+            ]
+        },
+
+        {
+            "name": "360-update-customer-info",
+            "id": "360-update-customer-info",
+            "description": "Update customer-info",
+            "baseUri": "/restservices/customer360/v2/service/customerInfo/{accountId}",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-reset-pin-and-sqa",
+            "id": "360-reset-pin-and-sqa",
+            "description": "Send a self service link to reset PIN and SQA for a given customer telephone",
+            "uri": "/security/resetpinandsqa",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-reset-password",
+            "id": "360-reset-password",
+            "description": "Validates the OTP provided. If otp is valid then generate password and update the user with temporary password info along with question and answer in the sms.",
+            "uri": "/security/resetpassword",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "incentive-enrollments",
+            "id": "incentive-enrollments",
+            "description": "Incentive Enrollments - Coupons",
+            "baseUri": "/restservices/cricket/apis/v1/incentive/enrollments",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "userGroup": "B",
+            "config": {
+                "headers": {
+                    "Authorization": "Basic bTI2Mzg5QGFjY3RtZ210LmN3LmF0dC5jb206VTg5aEQ3U25Kcw==",
+                    "x-user-id": "asapId",
+                    "x-saleslocation-id": "DEFDELER",
+                    "x-application-id": "CRM",
+                    "x-api-version": "1.0.0",
+                    "x-client-timestamp": 20200721120000,
+                    "X-ATT-ConversationId": "test~customer360~hbomax~00000000"
+                }
+            }
+        },
+        {
+            "name": "360-validate-equipment",
+            "id": "360-validate-equipment",
+            "uri": "/updateequipment/validate",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-update-equipment",
+            "id": "360-update-equipment",
+            "uri": "/updateequipment/update",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-get-plans-and-add-ons",
+            "id": "360-get-plans-and-add-ons",
+            "description": "Get available plans, addons and recommended deals",
+            "baseUri": "/restservices/customer360/v2/service/changeplan/getplansandaddons",
+            "method": "post",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-technical-soc-update",
+            "id": "360-technical-soc-update",
+            "description": "Add or Remove TechnicalSocs",
+            "baseUri": "/restservices/customer360/v2/service/changeplan/services/{phonenumber}",
+            "method": "put",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-create-order",
+            "id": "360-create-order",
+            "description": "Cancel, suspend, resume and restore subscribers",
+            "baseUri": "/restservices/customer360/v2/service/changeplan/createorder",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "userGroup": "B",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-submit-order",
+            "id": "360-submit-order",
+            "description": "Submit changeplan order",
+            "baseUri": "/restservices/customer360/v2/service/changeplan/submitorder",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-get-priceorder",
+            "id": "360-get-priceorder",
+            "baseUri": "/restservices/customer360/v2/service/priceorder",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId"
+                }
+            }
+        },
+        {
+            "name": "360-validate-add-line-data",
+            "id": "360-validate-add-line-data",
+            "description": "OrderStatus API interact with OrderManagement",
+            "baseUri": "/restservices/customer360/v2/service/validateaddlinedata",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-saleslocation-id": "DEFDELER"
+                }
+            }
+        },
+        {
+            "name": "360-crp-get-consent-data",
+            "id": "360-crp-get-consent-data",
+            "description": "Return consent metadata from reference configuration.",
+            "baseUri": "/restservices/cricket/apis/consentmanagement/v2/consents/metadata",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-api-version": "1.0.0",
+                    "x-saleslocation-id": 14240103,
+                    "x-application-id": "CRM"
+                }
+            }
+        },
+        {
+            "name": "360-crp-create-consent-data",
+            "id": "360-crp-create-consent-data",
+            "description": "Create consent metadata in reference configuration.",
+            "baseUri": "/restservices/cricket/apis/consentmanagement/v2/consents",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-api-version": "1.0.0",
+                    "x-saleslocation-id": 14240103,
+                    "x-application-id": "CRM"
+                }
+            }
+        },
+        {
+            "name": "360-create-case",
+            "id": "360-create-case",
+            "baseUri": "/restservices/customer360/v2/service/cases/create",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-save-interaction",
+            "id": "360-save-interaction",
+            "baseUri": "/restservices/customer360/v2/service/interactions/save",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-submit-interaction",
+            "id": "360-submit-interaction",
+            "baseUri": "/restservices/customer360/v2/service/interactions/submit",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-create-interaction",
+            "id": "360-create-interaction",
+            "baseUri": "/restservices/customer360/v2/service/interactions/create",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-cases-interactions-metadata",
+            "id": "360-cases-interactions-metadata",
+            "baseUri": "/restservices/customer360/v2/service/metadata",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-change-ctn",
+            "id": "360-change-ctn",
+            "description": "Change CTN",
+            "uri": "/changectn/{billingAccountNumber}/cricketnumber",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-recover-ctn-get",
+            "id": "360-recover-ctn-get",
+            "description": "Change CTN",
+            "uri": "/changectn/{phonenumber}/recoverctn",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-get-security-question-x",
+            "id": "360-get-security-question-x",
+            "description": "Get Security Question",
+            "uri": "/security/securityquestion",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-get-security-question",
+            "id": "360-get-security-question",
+            "description": "Get Security Question",
+            "uri": "/security/securityquestion/{targetAccount}",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-validate-customer",
+            "id": "360-validate-customer",
+            "description": "Get Security Question",
+            "uri": "/security/validatecustomer/{targetAccount}",
+            "method": "post",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-pendingactivity-cancel",
+            "id": "360-pendingactivity-cancel",
+            "description": "Cancel Pending Activity",
+            "uri": "/pendingactivity/{ban}/{sequencenumber}",
+            "method": "delete",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-move-sub-stage",
+            "id": "360-move-sub-stage",
+            "description": "Stage Move Subscriber",
+            "uri": "/movesubscriber",
+            "method": "post",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            }
+        },
+        {
+            "name": "360-move-sub-confirm",
+            "id": "360-move-sub-confirm",
+            "description": "Confirm Move Subscriber",
+            "uri": "/movesubscriber",
+            "method": "put",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-validate-tablet-cancellation",
+            "id": "360-validate-tablet-cancellation",
+            "description": "validate tablet lines activities",
+            "baseUri": "/restservices/customer360/v2/service/tabletcancelvalidations/{ban}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-change-subscriber-status",
+            "id": "360-change-subscriber-status",
+            "description": "Cancel, suspend, resume and restore subscribers",
+            "baseUri": "/restservices/customer360/v2/service/subscriberstatus/{accountId}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId"
+                }
+            }
+        },
+        {
+            "name": "360-feedback-tool",
+            "id": "360-feedback-tool",
+            "description": "Save feedback given by the agent",
+            "baseUri": "/restservices/customer360/v2/service/feedback",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-update-blacklist-async-machine",
+            "id": "360-update-blacklist-async-machine",
+            "description": "",
+            "baseUri": "/restservices/customer360/v2/service/resource/blacklist",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-one-time-pin",
+            "id": "360-one-time-pin",
+            "description": "Repeat one time pin",
+            "baseUri": "/restservices/customer360/v2/service/otp/generate/",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-one-time-password-generate",
+            "id": "360-one-time-password-generate",
+            "description": "Service to generateOTP for Password Reset. This password has limited configured time to live.",
+            "uri": "/otp/generate/{billingaccountnumber}/{phonenumber}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-one-time-password-validate",
+            "id": "360-one-time-password-validate",
+            "description": "Service to validate OTP which is generated using generate otp.",
+            "uri": "/otp/validate/{billingaccountnumber}/{phonenumber}/{otp}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-one-time-pin-validate",
+            "id": "360-one-time-pin-validate",
+            "description": "Validate one time pin",
+            "baseUri": "/restservices/customer360/v2/service/otp/validate/",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-update-whitelist",
+            "id": "360-update-whitelist",
+            "description": "Update whitelist",
+            "baseUri": "/restservices/customer360/v2/service/resource/whitelist",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-inquire-resource-status",
+            "id": "360-inquire-resource-status",
+            "description": "Inquire resource status",
+            "baseUri": "/restservices/customer360/v2/service/resource/inquirestatus/",
+            "loadStrategy": "onDemand",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-application-id": "CRM",
+                    "x-user-id": "asapId"
+                },
+                "maxRetries": 5,
+                "timeout": 10000
+            }
+        },
+        {
+            "name": "360-accept-payment",
+            "id": "360-accept-payment",
+            "description": "",
+            "baseUri": "/restservices/customer360/v2/service/payment",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-otp-login",
+            "id": "360-otp-login",
+            "description": "",
+            "uri": "/security/onetimepin/{phonenumber}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-create-account",
+            "id": "360-create-account",
+            "description": "Create Account",
+            "uri": "/createAccount",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                },
+                "encryption": {
+                    "key": "Xz13gL1ZNBaeAGo8HXmQWQ=="
+                }
+            }
+        },
+        {
+            "name": "inequity-add-remove-soc",
+            "id": "inequity-add-remove-soc",
+            "description": "Add Remove SOC",
+            "baseUri": "/restservices/cricket/v1/inequityservices/soc",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId"
+                }
+            }
+        },
+        {
+            "name": "360-log-cust-auth",
+            "id": "360-log-cust-auth",
+            "description": "Log Customer Call",
+            "uri": "/logcustomercall",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            }
+        },
+        {
+            "name": "360-case-update",
+            "id": "360-case-update",
+            "description": "Update Case",
+            "uri": "/cases/update",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-search-users",
+            "id": "360-search-users",
+            "description": "Search Users",
+            "uri": "/users/search",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-customer-info-by-query",
+            "id": "360-customer-info-by-query",
+            "description": "Customer Info By Query",
+            "uri": "/customerinfobyquery",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-case-bulkupdate",
+            "id": "360-case-bulkupdate",
+            "description": "Bulk Update Case",
+            "uri": "/cases/bulkupdate",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-create-gssm-state",
+            "id": "360-create-gssm-state",
+            "description": "Create Session",
+            "baseUri": "/restservices/cricket/gssm/v1/session/{sessionId}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-search-interactions",
+            "id": "360-search-interactions",
+            "baseUri": "/restservices/customer360/v2/service/interactions/search",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-delete-authorized-users",
+            "id": "360-delete-authorized-users",
+            "baseUri": "/restservices/cwpos/v1/accountAuthorizedUsers/bans/{ban}/identifiers/{id}",
+            "loadStrategy": "onDemand",
+            "method": "delete",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.18.1",
+                    "x-application-id": "SSCRM",
+                    "Content-Type": "application/json",
+                    "x-user-id": "asapId",
+                    "x-internal-location-id": "DEFDELER"
+                }
+            }
+        },
+        {
+            "name": "360-get-authorized-users",
+            "id": "360-get-authorized-users",
+            "baseUri": "/restservices/cwpos/v1/accountAuthorizedUsers/bans/{ban}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.18.1",
+                    "x-application-id": "SSCRM",
+                    "Content-Type": "application/json",
+                    "x-user-id": "asapId",
+                    "x-internal-location-id": "DEFDELER"
+                }
+            }
+        },
+        {
+            "name": "360-add-authorized-users",
+            "id": "360-add-authorized-users",
+            "baseUri": "/restservices/cwpos/v1/accountAuthorizedUsers/bans/{ban}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.18.1",
+                    "x-application-id": "SSCRM",
+                    "Content-Type": "application/json",
+                    "x-user-id": "asapId",
+                    "x-internal-location-id": "DEFDELER"
+                }
+            }
+        },
+        {
+            "name": "360-update-authorized-users",
+            "id": "360-update-authorized-users",
+            "baseUri": "/restservices/cwpos/v1/accountAuthorizedUsers/bans/{ban}",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.18.1",
+                    "x-application-id": "SSCRM",
+                    "Content-Type": "application/json",
+                    "x-user-id": "asapId",
+                    "x-internal-location-id": "DEFDELER"
+                }
+            }
+        },
+        {
+            "name": "360-port-protect",
+            "id": "360-port-protect",
+            "baseUri": "/restservices/cricket/apis/v1/subscribers/attributes",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELER",
+                    "Content-Type": "application/json",
+                    "x-user-id": "asapId",
+                    "x-client-timestamp": 20200721120000
+                }
+            }
+        },
+        {
+            "name": "360-market-opt-in",
+            "id": "360-market-opt-in",
+            "description": "Marketing Opt-In",
+            "baseUri": "/restservices/customer360/v2/service/customerpreferences/{ban}",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId",
+                    "content-type": "*/*",
+                    "x-att-id": "attId",
+                    "x-user-profile": "profile"
+                }
+            },
+            "fields": []
+        },
+        {
+            "name": "360-promotions-entitlement",
+            "id": "360-promotions-entitlement     ",
+            "baseUri": "/restservices/cricket/apis/v1/promotions/entitlement/{programId}?identifierType=BAN&identifier={accountId}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "x-application-id": "CWPOS",
+                    "x-saleslocation-id": "DEFDELER",
+                    "Content-Type": "application/json",
+                    "x-user-id": "asapId",
+                    "x-client-timestamp": 20200721120000
+                }
+            }
+        },
+        {
+            "name": "360-interactions-uniphore",
+            "id": "360-interactions-uniphore",
+            "baseUri": "/restservices/customer360/v2/service/interactions/uniphore/{sessionId}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELER",
+                    "Content-Type": "application/json",
+                    "x-user-id": "asapId",
+                    "x-client-timestamp": 20200721120000,
+                    "x-att-id": "attId"
+                }
+            }
+        },
+        {
+            "name": "360-update-acp-address",
+            "id": "360-update-acp-address",
+            "baseUri": "/restservices/cricket/bis/v1",
+            "uri": "/identity",
+            "loadStrategy": "onDemand",
+            "method": "put",
+            "config": {
+                "headers": {
+                    "x-api-version": "1.0.0",
+                    "Authorization": "Basic bTE5NzI5QGN3LmxvcG8uY3Vsby5jdXN0bWdtdC5hdHQuY29tOkNyIWNrZXQzMjQyMA==",
+                    "x-application-userid": "Customer360",
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "x-saleslocation-id": "DEFDELR"
+                }
+            }
+        },
+        {
+            "name": "360-esim-status",
+            "id": "360-esim-status",
+            "baseUri": "/restservices/customer360/v2/service/esim/status/{ctn}",
+            "loadStrategy": "onDemand",
+            "method": "get",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-esim-provision",
+            "id": "360-esim-provision",
+            "baseUri": "/restservices/customer360/v2/service/esim/provision/{ctn}",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-user-id": "asapId"
+                }
+            }
+        },
+        {
+            "name": "360-esim-email-qr",
+            "id": "360-esim-email-qr",
+            "baseUri": "/restservices/cricket/esimservices/v1/esims/sendQRImage",
+            "loadStrategy": "onDemand",
+            "method": "post",
+            "config": {
+                "headers": {
+                    "x-client-mechid": "mechId",
+                    "x-user-id": "asapId",
+                    "x-application-id": "SSCRM",
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+            }
+        }
+    ]
+}

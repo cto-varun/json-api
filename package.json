@@ -1,0 +1,28 @@
+{
+    "name": "@ivoyant/json-api",
+    "version": "1.0.0",
+    "description": "Functional API based on specs",
+    "main": "src/server.js",
+    "bin": {
+        "json-api": "./bin/json-api"
+    },
+    "author": "Maksim Kotelnikov <mail@maximkotelnikov.me>",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "startbuilder": "cross-env REACT_APP_BUILDER=true nodemon ./bin/json-api",
+        "startviewer": "cross-env REACT_APP_VIEWER=true nodemon ./bin/json-api",
+        "startviewerb": "cross-env REACT_APP_VIEWER_GROUP_B=true nodemon ./bin/json-api",
+        "build": "exit 0"
+    },
+    "dependencies": {
+        "@ivoyant/fake-data": "^1.0.5",
+        "connect-static-file": "^2.0.0",
+        "cross-env": "5.1.1",
+        "json-server": "^0.16.3",
+        "cors": "^2.8.5"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.2"
+    }
+}
